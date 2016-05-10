@@ -27,7 +27,7 @@ var app = {
     app.fetch(false);
 
     // Poll for new messages
-    setInterval(app.fetch, 3000);
+    setInterval(app.fetch, 250);
   },
 
   send: function(data) {
