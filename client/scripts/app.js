@@ -4,15 +4,13 @@ var app = {
   //TODO: The current 'toggleFriend' function just toggles the class 'friend'
   //to all messages sent by the user
   server: 'http://localhost:3000/',
-  username: 'anonymous',
+  username: 'KNALY',
   roomname: 'lobby',
   lastMessageId: 0,
   friends: {},
 
   init: function() {
     // Get username
-    app.username = window.location.search.substr(10);
-
     // Cache jQuery selectors
     app.$message = $('#message');
     app.$chats = $('#chats');

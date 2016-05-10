@@ -11,7 +11,9 @@ var defaultCorsHeaders = {
 
 
 var express = require('express');
+var path = require('path');
 var bodyParser = require('body-parser');
+var fs = require('fs');
 var app = express();
 app.use(bodyParser.json());
 var http = require('http').Server(app);
@@ -23,13 +25,16 @@ app.get('/', function(req, res) {
 });
 
 app.get('/classes/messages', function(req, res) {
-  res.writeHead(200, headers);
-  res.end(JSON.stringify(dataObject));
+  var string = fs.readFileSync('/Users/student/Desktop/2016-04-chatterbox-server/server/knawledge.txt');
+  res.send(string);
 });
 
 app.post('/send', function(req, res) {
-  res.writeHead(201, headers);
-  dataObject.results.push(req.body);
+  var string = fs.readFileSync('/Users/student/Desktop/2016-04-chatterbox-server/server/knawledge.txt');
+  string = JSON.parse(string);
+  string.results.push(req.body);
+  string = JSON.stringify(string);
+  fs.writeFileSync('/Users/student/Desktop/2016-04-chatterbox-server/server/knawledge.txt', string);
 });
 
 http.listen(3000, function() {
