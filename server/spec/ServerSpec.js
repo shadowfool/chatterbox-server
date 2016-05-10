@@ -18,7 +18,6 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
-
     expect(res._responseCode).to.equal(200);
     expect(res._ended).to.equal(true);
   });
@@ -28,7 +27,6 @@ describe('Node Server Request Listener Function', function() {
     var res = new stubs.response();
 
     handler.requestHandler(req, res);
-
     expect(JSON.parse.bind(this, res._data)).to.not.throw();
     expect(res._ended).to.equal(true);
   });
