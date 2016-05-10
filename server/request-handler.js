@@ -18,10 +18,7 @@ this file and include it in basic-server.js so that it actually works.
 **************************************************************/
 
 var requestHandler = function(request, response) {
-  var postData = '';
-  request.on('data', function(chunk) {
-    postData += chunk;
-  });
+
 
   // Request and Response come from node's http module.
   //
@@ -69,17 +66,17 @@ var requestHandler = function(request, response) {
 
   if (method === 'GET' && url === '/classes/messages') {
     response.writeHead(200, headers);
-
     response.end(JSON.stringify(dataObject));
-  } else if (method === 'POST' && (url === '/send' || url === '/classes/messages')) {
+  } else if (method === 'POST' && (url === '/send' || url === '/classes/messages' || url === '/classes/room')) {
     response.writeHead(201, headers);
-    console.log(postData);
-
-    response.end();
-    // // doesn't like this
-    // console.log(JSON.parse(postData));
-    // dataObject.results.push(JSON.parse(postData));
-    //request.write(JSON.stringify(dataObject));
+    var body = '';
+    request.on('data', function(chunk) {
+      body += chunk;
+    });
+    request.on('end', function() {
+      dataObject.results.push(JSON.parse(body));
+      response.end();
+    });
   } else {
     response.writeHead(404, headers);
     response.end();
