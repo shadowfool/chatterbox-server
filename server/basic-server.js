@@ -36,7 +36,7 @@ if (cluster.isMaster) {
 
   app.get('/classes/messages', function(req, res) {
     console.log(cluster.worker.id + 'served u :)');
-    // var string = fs.readFileSync('/Users/student/Desktop/2016-04-chatterbox-server/server/knawledge.txt');
+    // var strin  g = fs.readFileSync('/Users/student/Desktop/2016-04-chatterbox-server/server/knawledge.txt');
     // res.send(string);
     var readStream = fs.createReadStream('/Users/student/Desktop/2016-04-chatterbox-server/server/knawledge.txt', {encoding: 'utf8'});
 

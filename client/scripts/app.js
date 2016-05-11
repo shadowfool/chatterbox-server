@@ -8,6 +8,7 @@ var app = {
   roomname: 'lobby',
   lastMessageId: 0,
   friends: {},
+  counter: 0,
 
   init: function() {
     // Get username
@@ -27,14 +28,14 @@ var app = {
     app.fetch(false);
 
     // Poll for new messages
-    setInterval(app.fetch, 250);
+    setInterval(app.fetch, 3000);
   },
 
   send: function(data) {
     app.startSpinner();
     // Clear messages input
     app.$message.val('');
-
+    data.createdAt = new Date();
     // POST the message to the server
     $.ajax({
       url: app.server + 'send',
